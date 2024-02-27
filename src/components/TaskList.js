@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import Task from "./Task";
 
-function TaskList() {
+
+function TaskList({ selected, tasks, setTasks }) {
+  
+
+  function handleDelete(task) {
+    const filteredItems = tasks.filter( element => element.text !== task)
+    console.log(filteredItems)
+    setTasks(filteredItems)
+  }
+
+    const filteredElements = tasks.filter( element => element.category === selected || selected === "All")
+   
+  
+  
   return (
     <div className="tasks">
-      {/* display a list of tasks using Task component */}
+      {filteredElements.map((task, index) => (
+      <Task 
+      handleDelete={handleDelete}
+      key={index}
+      task={task.text}
+      category={task.category}/>)
+
+      
+      
+      )}
     </div>
   );
 }
