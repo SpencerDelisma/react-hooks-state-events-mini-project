@@ -1,32 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Task from "./Task";
 
+// don't miss the {} inside the function
 
-function TaskList({ selected, tasks, setTasks }) {
-  
-
-  function handleDelete(task) {
-    const filteredItems = tasks.filter( element => element.text !== task)
-    console.log(filteredItems)
-    setTasks(filteredItems)
-  }
-
-    const filteredElements = tasks.filter( element => element.category === selected || selected === "All")
-   
-  
-  
+function TaskList({ tasks, category, text, deleteThis }) { // make sure to have the 3 argument tasks, category, text (even if you're only using 1 or 2 of the 3)
   return (
     <div className="tasks">
-      {filteredElements.map((task, index) => (
-      <Task 
-      handleDelete={handleDelete}
-      key={index}
-      task={task.text}
-      category={task.category}/>)
-
-      
-      
-      )}
+      {/* display a list of tasks using Task component */}
+      {tasks.map(task => (
+        <Task key={task.text} task={task} category={task.category} text={task.text} deleteThis={deleteThis}></Task>
+      ))}
     </div>
   );
 }
